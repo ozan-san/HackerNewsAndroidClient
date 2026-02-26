@@ -17,6 +17,8 @@ class LandingViewModel @Inject constructor(
     private val _topStoryTitles = MutableStateFlow<List<String>>(listOf())
     val topStoryTitles = _topStoryTitles.asStateFlow()
 
+    private val _selectedTab = MutableStateFlow("TOP")
+    val selectedTab = _selectedTab.asStateFlow()
 
     init {
         fetch()
@@ -27,5 +29,9 @@ class LandingViewModel @Inject constructor(
             val topStories = getTopStoriesUseCase()
             _topStoryTitles.value = topStories.mapNotNull { it.title }
         }
+    }
+
+    fun onTabSelected(tab: String) {
+        _selectedTab.value = tab
     }
 }
