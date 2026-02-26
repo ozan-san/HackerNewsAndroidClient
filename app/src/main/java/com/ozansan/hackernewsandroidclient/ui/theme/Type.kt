@@ -37,12 +37,33 @@ val Typography = Typography(
         lineHeight = 32.sp,
         letterSpacing = (-1.2).sp
     ),
+    labelSmall = TextStyle(
+        fontFamily = jbMonoFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 10.sp,
+        lineHeight = 15.sp,
+        letterSpacing = 0.sp
+    ),
     labelMedium = TextStyle(
         fontFamily = jbMonoFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 12.sp,
         lineHeight = 16.sp,
         letterSpacing = (1.2).sp
+    ),
+    labelLarge = TextStyle(
+        fontFamily = jbMonoFontFamily,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 18.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = jbMonoFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        lineHeight = 20.sp,
+        letterSpacing = (-0.4).sp
     )
         /*
     labelSmall = TextStyle(
