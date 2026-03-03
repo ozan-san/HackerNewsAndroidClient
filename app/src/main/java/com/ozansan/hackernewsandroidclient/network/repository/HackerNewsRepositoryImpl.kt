@@ -11,6 +11,14 @@ class HackerNewsRepositoryImpl @Inject constructor(
         return hackerNewsApi.getTopStories()
     }
 
+    override suspend fun getNewStoryIds(): List<Long> {
+        return hackerNewsApi.getNewStories()
+    }
+
+    override suspend fun getBestStoryIds(): List<Long> {
+        return hackerNewsApi.getBestStories()
+    }
+
     override suspend fun getItemContent(id: Long): HNItem {
         return hackerNewsApi.getItem(id)
     }

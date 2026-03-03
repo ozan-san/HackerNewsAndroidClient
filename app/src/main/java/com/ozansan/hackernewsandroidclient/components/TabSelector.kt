@@ -1,7 +1,6 @@
 package com.ozansan.hackernewsandroidclient.components
 
 import android.content.res.Configuration
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -32,12 +31,15 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.ozansan.hackernewsandroidclient.ui.theme.HackerNewsAndroidClientTheme
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun TabSelector(
-    options: List<String>,
+    options: ImmutableList<String>,
     selectedOption: String,
     onOptionSelected: (String) -> Unit
 ) {
@@ -68,7 +70,9 @@ fun TabSelector(
             modifier = Modifier
                 .width(rowWidth / options.size)
                 .fillMaxHeight()
-                .offset(x = indicatorOffset)
+                .offset {
+                    IntOffset(x = indicatorOffset.roundToPx(), y = 0)
+                }
                 .background(unselectedColor)
         )
 
@@ -82,11 +86,7 @@ fun TabSelector(
                     .fillMaxHeight()
                     .clickable { onOptionSelected(option) }
 
-                val textColor by animateColorAsState(
-                    targetValue = if (selectedIndex == index) selectedColor else unselectedColor,
-                    label = "textColor"
-                )
-
+                val textColor = if (selectedIndex == index) selectedColor else unselectedColor
                 Box(
                     modifier = if (index > 0) {
                         itemModifier.drawBehind {
@@ -123,7 +123,7 @@ fun TabSelector(
 @Composable
 fun TabSelectorPreview() {
     var selectedTab by remember { mutableStateOf("TOP") }
-    val tabs = listOf("NEW", "TOP", "BEST")
+    val tabs = listOf("NEW", "TOP", "BEST").toImmutableList()
 
     HackerNewsAndroidClientTheme {
         Column(

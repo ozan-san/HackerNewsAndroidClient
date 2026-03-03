@@ -3,13 +3,13 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt.android.plugin)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.ozansan.hackernewsandroidclient"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
+
 
     defaultConfig {
         applicationId = "com.ozansan.hackernewsandroidclient"
@@ -37,6 +37,11 @@ android {
     buildFeatures {
         compose = true
     }
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+        }
+    }
 }
 
 dependencies {
@@ -63,4 +68,11 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.kotlinx.collections.immutable)
+    debugImplementation(libs.leakcanary.android)
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlin:kotlin-metadata-jvm:2.3.0-Beta1")
+    }
 }
